@@ -10,10 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: install vpnc and create config
+    - name: install vpnc and ansible
       run: |
-        sudo apt-get update 
-        sudo apt-get install -y vpnc p7zip-full unzip
-        echo -e "${{ secrets.FULL_CONF }}" >> /tmp/1.conf
-        sudo /usr/sbin/vpnc /tmp/1.conf
-        ping 10.82.0.80
+        (sudo apt-get update && sudo apt-get install -y vpnc p7zip-full unzip)
+        (sudo apt-get remove ansible && sudo apt-get install -y openssh-client build-essential libffi-dev libxslt-dev libssl-dev python3 python3-pip git)
+        (sudo pip3 install ansible junos-eznc jxmlease ncclient&&ansible-galaxy install Juniper.junos)
+    - name: configure ansible
+      run: |
+
+    - name: connect to vpn
+      run: (echo -e "${{ secrets.FULL_CONF }}" >> /tmp/1.conf&&sudo /usr/sbin/vpnc /tmp/1.conf)
+
