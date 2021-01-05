@@ -1,8 +1,8 @@
 # GOGO
 
-#secrets formats
+# secrets formats
 
-##FULL_CONF
+## FULL_CONF
 
 IPSec gateway x.x.x.x
 IPSec ID group 
@@ -10,7 +10,7 @@ IPSec secret group_key
 Xauth username username 
 Xauth password password
 
-##FULL_HOSTS
+## FULL_HOSTS
 
 name1 ansible_host=x.x.x.x ansible_user=username ansible_passwd=password
 name1 ansible_host=x.x.x.x ansible_user=username ansible_passwd=password
