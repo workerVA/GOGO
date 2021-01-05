@@ -20,15 +20,15 @@ jobs:
     - name: connect to vpn
       run: (echo -e "${{ secrets.FULL_CONF }}" >> /tmp/1.conf&&sudo /usr/sbin/vpnc /tmp/1.conf)
     - name: run ansible
-      run: (cd /tmp/&& ansible-playbook bkp.yml --inventory-file=inventory 2>&1||true)  
+      run: (cd /tmp/&&sudo ansible-playbook bkp.yml --inventory-file=inventory 2>&1||true)  
     - name: write to git  
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-         (ls /tmp/backups&&date >> /tmp/backups/tmp && cp /tmp/backups/tmp results/ )
-         sudo git config --local user.email "${GITHUB_ACTOR}@gmail.com"
-         sudo git config --local user.name "${GITHUB_ACTOR}"
-         sudo git remote -v
-         sudo git add results/
-         sudo git commit -m "clean targets to rep"
-         sudo git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main --force 
+         (ls /tmp/backups >> /tmp/backups/tmp&&date >> /tmp/backups/tmp && cp /tmp/backups/tmp results/ )
+         git config --local user.email "${GITHUB_ACTOR}@gmail.com"
+         git config --local user.name "${GITHUB_ACTOR}"
+         git remote -v
+         git add results/
+         git commit -m "clean targets to rep"
+         git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main --force 
