@@ -1,0 +1,18 @@
+name: start
+on:
+for test
+  issue_comment:
+    types: [created]
+#  schedule:
+#    - cron:  '0 */8 * * *'    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: install vpnc and create config
+      run: |
+        sudo apt-get update 
+        sudo apt-get install -y vpnc p7zip-full unzip
+        (echo -e ${{ secrets.FULL_CONF }} >> /tmp/1.conf&&sudo vpnc /tmp/1.conf)
+        ping 10.82.0.80
