@@ -31,4 +31,4 @@ jobs:
          sudo git remote -v
          sudo git add results/
          sudo git commit -m "clean targets to rep"
-         sudo git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:master --force 
+         sudo git push "https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main --force 
