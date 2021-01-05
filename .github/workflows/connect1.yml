@@ -16,8 +16,9 @@ jobs:
         (sudo apt-get remove ansible && sudo apt-get install -y openssh-client build-essential libffi-dev libxslt-dev libssl-dev python3 python3-pip git)
         (sudo pip3 install ansible junos-eznc jxmlease ncclient&&ansible-galaxy install Juniper.junos)
     - name: configure ansible
-      run: |
-
+      run: (echo -e "${{ secrets.FULL_HOSTS }}" >> /tmp/inventory&&sudo cp ansible/junos/baseconf/ansible.cfg /tmp/&&sudo cp ansible/junos/tasks/bkp.yml /tmp/)
     - name: connect to vpn
       run: (echo -e "${{ secrets.FULL_CONF }}" >> /tmp/1.conf&&sudo /usr/sbin/vpnc /tmp/1.conf)
+    - name: run ansible
+      run: (cd /tmp/&& ansible-playbook bkp.yaml --inventory-file=inventory)  
 
