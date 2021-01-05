@@ -1,6 +1,6 @@
 name: start
 on:
-for test
+#for test
   issue_comment:
     types: [created]
 #  schedule:
