@@ -25,7 +25,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-         (ls /tmp/backups &&sudo date >> /tmp/backups/tmp &&sudo cp /tmp/backups/tmp results/ )
+         (sudo ls /tmp/backups &&sudo date >> /tmp/backups/tmp &&sudo cp /tmp/backups/tmp results/ )
          sudo git config --local user.email "${GITHUB_ACTOR}@gmail.com"
          sudo git config --local user.name "${GITHUB_ACTOR}"
          sudo git remote -v
