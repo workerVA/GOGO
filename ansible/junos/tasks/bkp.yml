@@ -12,8 +12,8 @@
     config_filename: "{{ config_dir }}/{{ inventory_hostname }}.conf"
     connection_settings:
       host: "{{ ansible_host }}"
-	  user: "adminnimda"
-	  passwd: "adminnimda"
+      user: "{{ ansible_user }}"
+      passwd: "{{ ansible_passwd }}"
 
   tasks:
     - name: confirm/create device configuration directory
