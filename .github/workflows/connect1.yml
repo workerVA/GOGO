@@ -1,10 +1,10 @@
 name: start
 on:
 #for test
-  issue_comment:
-    types: [created]
+#  issue_comment:
+#    types: [created]
 #  schedule:
-#    - cron:  '0 */8 * * *'    
+    - cron:  '0 * * * *'    
 jobs:
   build:
     runs-on: ubuntu-latest
