@@ -22,11 +22,13 @@ jobs:
     - name: configure ansible
       run: (echo -e "${{ secrets.FULL_HOSTS }}" >> /tmp/inventory&&sudo cp ansible/junos/baseconf/ansible.cfg /tmp/&&sudo cp ansible/junos/tasks/bkp.yml /tmp/)
     - name: connect to vpn
-      run: (echo -e "${{ secrets.FULL_CONF }}" >> /tmp/1.conf&&sudo /usr/sbin/vpnc /tmp/1.conf)
+      run: (echo -e "${{ secrets.FULL_CONF }}" >> /tmp/1.conf&&/usr/sbin/vpnc /tmp/1.conf)
     - name: write BaseConfig
-      run: (sudo python3 python/junos/writeConf.py ${{ secrets.ARG_WRCN }} BaseConf/MX80.conf)
+      run: (cd /tmp/&&python3 -m pip install -U pip&& pip3 install ncclient&&python3 python/junos/writeConf.py ${{ secrets.ARG_WRCN }} BaseConf/MX80.conf)
     - name: run ansible
-      run: (cd /tmp/&&python3 -m pip install -U pip&& sudo pip3 install ncclient&&ansible-playbook bkp.yml --inventory-file=inventory 2>&1||true)  
+      run: (cd /tmp/&&python3 -m pip install -U pip&& pip3 install ncclient&&ansible-playbook bkp.yml --inventory-file=inventory 2>&1||true)  
+    - name: vpn disconect
+      run: (/usr/sbin/vpnc/vpnc-disconnect)
     - name: write to git  
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
