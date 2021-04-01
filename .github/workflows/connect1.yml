@@ -3,8 +3,8 @@ on:
 #for test
   issue_comment:
     types: [created]
-  schedule:
-    - cron:  '0 * * * *'    
+#  schedule:
+#    - cron:  '0 * * * *'    
 jobs:
   build:
 #    runs-on: ubuntu-latest
@@ -18,7 +18,7 @@ jobs:
       run: |
         (sudo apt-get update && sudo apt-get install -y vpnc python3-setuptools p7zip-full unzip)
         (sudo apt-get remove ansible && sudo apt-get install -y openssh-client build-essential libffi-dev libxslt-dev libssl-dev python3 python3-pip git)
-        (sudo pip3 install ansible junos-eznc jxmlease ncclient&&ansible-galaxy install Juniper.junos)
+        (sudo pip3 install six&&sudo pip3 install ansible junos-eznc jxmlease ncclient&&ansible-galaxy install Juniper.junos)
     - name: configure ansible
       run: (echo -e "${{ secrets.FULL_HOSTS }}" >> /tmp/inventory&&sudo cp ansible/junos/baseconf/ansible.cfg /tmp/&&sudo cp ansible/junos/tasks/bkp.yml /tmp/)
     - name: connect to vpn
