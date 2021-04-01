@@ -42,7 +42,7 @@ def main():
 
     print ("Loading configuration changes")
     try:
-        dev.cu.load(path=conf_file, merge=True,overwrite=True)
+        dev.cu.load(path=conf_file, overwrite=True)
     except (ConfigLoadError, Exception) as err:
         print ("Unable to load configuration changes: {0}".format(err))
         print ("Unlocking the configuration")
