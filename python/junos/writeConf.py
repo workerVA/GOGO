@@ -1,3 +1,5 @@
+import sys
+import os
 from jnpr.junos import Device
 from jnpr.junos.utils.config import Config
 from jnpr.junos.exception import ConnectError
@@ -32,7 +34,7 @@ def main():
     # Lock the configuration, load configuration changes, and commit
     print ("Locking the configuration")
     try:
-        dev.cu.lock()
+#        dev.cu.lock()
     except LockError as err:
         print ("Unable to lock configuration: {0}".format(err))
         dev.close()
@@ -45,7 +47,7 @@ def main():
         print ("Unable to load configuration changes: {0}".format(err))
         print ("Unlocking the configuration")
         try:
-                dev.cu.unlock()
+#                dev.cu.unlock()
         except UnlockError:
             print ("Unable to unlock configuration: {0}".format(err))
         dev.close()
@@ -58,7 +60,7 @@ def main():
         print ("Unable to commit configuration: {0}".format(err))
         print ("Unlocking the configuration")
         try:
-            dev.cu.unlock()
+#           dev.cu.unlock()
         except UnlockError as err:
             print ("Unable to unlock configuration: {0}".format(err))
         dev.close()
@@ -66,7 +68,7 @@ def main():
 
     print ("Unlocking the configuration")
     try:
-        dev.cu.unlock()
+#        dev.cu.unlock()
     except UnlockError as err:
         print ("Unable to unlock configuration: {0}".format(err))
 
