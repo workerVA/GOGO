@@ -27,8 +27,6 @@ jobs:
       run: (python3 -m pip install -U pip&& pip3 install ncclient&&python3 python/junos/writeConf.py ${{ secrets.ARG_WRCN }} BaseConf/MX80.conf)
     - name: run ansible
       run: (cd /tmp/&&python3 -m pip install -U pip&& pip3 install ncclient&&ansible-playbook bkp.yml --inventory-file=inventory 2>&1||true)  
-    - name: vpn disconect
-      run: (vpnc-disconnect)
     - name: write to git  
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
