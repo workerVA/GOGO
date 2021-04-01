@@ -21,4 +21,4 @@ name1 ansible_host=x.x.x.x ansible_user=username ansible_passwd=password
 ansible_python_interpreter=/usr/bin/python3.6
 
 ## ARG_WRCN
-1.1.1.1 username password path_to_conf
+1.1.1.1 username password
