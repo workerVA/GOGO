@@ -32,13 +32,13 @@ def main():
     dev.bind(cu=Config)
 
     # Lock the configuration, load configuration changes, and commit
-    print ("Locking the configuration")
-    try:
+#    print ("Locking the configuration")
+#    try:
 #        dev.cu.lock()
-    except LockError as err:
-        print ("Unable to lock configuration: {0}".format(err))
-        dev.close()
-        return
+#    except LockError as err:
+#        print ("Unable to lock configuration: {0}".format(err))
+#        dev.close()
+#        return
 
     print ("Loading configuration changes")
     try:
@@ -46,10 +46,10 @@ def main():
     except (ConfigLoadError, Exception) as err:
         print ("Unable to load configuration changes: {0}".format(err))
         print ("Unlocking the configuration")
-        try:
-#                dev.cu.unlock()
-        except UnlockError:
-            print ("Unable to unlock configuration: {0}".format(err))
+ #       try:
+ #               dev.cu.unlock()
+ #       except UnlockError:
+ #           print ("Unable to unlock configuration: {0}".format(err))
         dev.close()
         return
 
@@ -59,18 +59,18 @@ def main():
     except CommitError as err:
         print ("Unable to commit configuration: {0}".format(err))
         print ("Unlocking the configuration")
-        try:
-#           dev.cu.unlock()
-        except UnlockError as err:
-            print ("Unable to unlock configuration: {0}".format(err))
+ #       try:
+ #          dev.cu.unlock()
+ #       except UnlockError as err:
+ #           print ("Unable to unlock configuration: {0}".format(err))
         dev.close()
         return
 
-    print ("Unlocking the configuration")
-    try:
-#        dev.cu.unlock()
-    except UnlockError as err:
-        print ("Unable to unlock configuration: {0}".format(err))
+ #   print ("Unlocking the configuration")
+ #   try:
+ #       dev.cu.unlock()
+ #   except UnlockError as err:
+ #       print ("Unable to unlock configuration: {0}".format(err))
 
     # End the NETCONF session and close the connection
     dev.close()
