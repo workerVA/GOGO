@@ -23,8 +23,10 @@ jobs:
       run: (echo -e "${{ secrets.FULL_HOSTS }}" >> /tmp/inventory&&sudo cp ansible/junos/baseconf/ansible.cfg /tmp/&&sudo cp ansible/junos/tasks/bkp.yml /tmp/)
     - name: connect to vpn
       run: (echo -e "${{ secrets.FULL_CONF }}" >> /tmp/1.conf&&sudo /usr/sbin/vpnc /tmp/1.conf)
-    - name: write BaseConfig
-      run: (python3 -m pip install -U pip&& pip3 install ncclient&&python3 python/junos/writeConf.py ${{ secrets.ARG_WRCN }} BaseConf/MX80.conf)
+#    - name: write BaseConfig
+#      run: (python3 -m pip install -U pip&& pip3 install ncclient&&python3 python/junos/writeConf.py ${{ secrets.ARG_WRCN }} BaseConf/MX80.conf)
+    - name: set FilterFirewall
+      run: (python3 -m pip install -U pip&& pip3 install ncclient&&python3 python/junos/setFilter.py ${{ secrets.ARG_WRCN }} BaseConf/ip.txt)
     - name: run ansible
       run: (cd /tmp/&&python3 -m pip install -U pip&& pip3 install ncclient&&ansible-playbook bkp.yml --inventory-file=inventory 2>&1||true)  
     - name: write to git  
